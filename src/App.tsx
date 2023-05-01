@@ -1,10 +1,13 @@
 import './App.css';
-import { Container } from './components/ui/atoms';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 function App() {
   return (
-    <Container>
-    </Container>
+    <BrowserRouter>
+      <Routes>
+        <Route></Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
