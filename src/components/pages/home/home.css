@@ -1,0 +1,35 @@
+.home-layout {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    place-items: center;
+    grid-gap: 20px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+  .btn {
+    border-radius: 3px;
+    display: inline-block;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 13px 40px;
+    border: 0;
+    transition: background-color 200ms, color 200ms;
+  }
+  
+  .btn-default {
+    color: var(--white);
+    background-color: var(--primary-1);
+  }
+
+  @media (max-width: 700px) {
+    .home-layout,
+    .about-layout,
+    .products-grid,
+    .product-details-layout {
+      grid-template-columns: 1fr;
+    }
+    .home-image {
+      order: -1;
+    }
+  }
