@@ -1,0 +1,19 @@
+.product {
+    /* border: 2px solid brown; */
+    background-color: white;
+    padding: 15px 20px;
+    border-radius: 25px;
+    /* display: grid; */
+  }
+
+  .product-image-container {
+    position: relative;
+    display: flex;
+  }
+
+  .product-image {
+    background-color: var(--neutral-5);
+    padding: 10px;
+    border-radius: 20px;
+    transition: transform 180ms ease-out;
+  }

@@ -38,6 +38,11 @@ code {
   --accent-5: #fff2f7;
 }
 
+body {
+  background-color: var(--neutral-5);
+  margin: 0;
+}
+
 [class*="ui"]{
   margin: 10px;
 }

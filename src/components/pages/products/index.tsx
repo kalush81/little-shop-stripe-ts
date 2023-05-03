@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
-import useFirebaseData from "../../../hooks/useFirebaseData";
-
-type Prod = {
-  name: string;
-  description: string;
-  image: string;
-};
+import { useFirebaseData, Prod } from "../../../hooks/useFirebaseData";
+import ProductCard from "../../ui/product-card";
+import "./products.css";
 
 interface ProductsProps {
   collection: string;
@@ -13,6 +9,8 @@ interface ProductsProps {
 export default function Products({ collection }: ProductsProps) {
   const { getAllProducts, loading } = useFirebaseData(collection);
   const [products, setProducts] = useState<Prod[]>([]);
+
+  console.log("all products from firestore", products)
 
   useEffect(() => {
     getAllProducts()
@@ -25,15 +23,17 @@ export default function Products({ collection }: ProductsProps) {
   }, [getAllProducts]);
 
   if (loading) return <>loading..</>;
-  
+
   return (
-    <>
-      <h1>All products</h1>
-      <ul>
+      <>
+<h2>Our paintings</h2>
+<p>take a look at our paintings</p>
+      <div className="products-grid">
         {products.map((p) => (
-          <img style={{ width: "200px" }} src={p.image} alt={p.name} />
+          <ProductCard data={p}/>
         ))}
-      </ul>
-    </>
+      </div>
+      </>  
+    
   );
 }

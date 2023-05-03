@@ -3,21 +3,28 @@ import firebaseApp from "../firebase";
 import { getFirestore, collection, getDocs } from 'firebase/firestore';
 const db = getFirestore(firebaseApp);
 
-type Prod = {
+export type Prod = {
+  id: string;
   name: string;
   description: string;
   image: string;
 }
 
-export default function useFirebaseData(endpoint: string) {
+export function useFirebaseData(endpoint: string) {
   const [loading, setLoading] = useState(true);
 
   const getAllProducts = useCallback(() => {
-    return new Promise(async (resolve, reject) => {
+    return new Promise<Prod[]>(async (resolve, reject) => {
       try {
         const productsCol = collection(db, endpoint);
         const productSnapshot = await getDocs(productsCol);
-        const productList = productSnapshot.docs.map(doc => doc.data()) as Prod[];
+        const productList = productSnapshot.docs.map((doc) => {
+          const data = doc.data();
+          return {
+            ...data,
+            id: doc.id,
+          };
+        }) as Prod[];
         setLoading(false);
         resolve(productList);
       } catch (error) {
@@ -27,11 +34,6 @@ export default function useFirebaseData(endpoint: string) {
     });
   }, [endpoint]);
 
-  // function getProductById(id) {
-  //   return new Promise((resolve, reject) => {
-
-  //   })
-
-
   return { getAllProducts, loading };
 };
+
